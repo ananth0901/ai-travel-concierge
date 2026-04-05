@@ -1,5 +1,6 @@
 import streamlit as st
 import os
+api_key = os.getenv("OPENAI_API_KEY")
 from rag.ingest import load_and_index
 
 st.title("AI Travel RAG Assistant")
