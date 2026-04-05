@@ -42,3 +42,6 @@ if uploaded_file:
 
     for chunk in response:
         st.empty(chunk.content, end="")
+        with st.expander("📚 View Sources"):
+    for i, doc in enumerate(docs):
+        st.write(f"Source {i+1}: {doc.metadata.get('source', 'Unknown')}")
