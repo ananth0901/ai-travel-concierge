@@ -18,14 +18,22 @@ if uploaded_file:
     # Ask question
     query = st.text_input("Ask something")
 
-    if query:
-        docs = db.similarity_search(query)
+  if query:
+    docs = db.similarity_search(query)
 
-        # Show answer (temporary)
-        st.write("### 🤖 Answer")
-        st.write("Answer will come here")
+    st.write("### 🤖 Answer")
+    st.write(answer)
 
-        # Show sources
-        st.write("### 📚 Sources:")
+    # 👇 PASTE HERE
+    unique_sources = set()
+
+    with st.expander("📚 View Sources"):
         for doc in docs:
-            st.write(doc.metadata)
+            source = doc.metadata.get("source", "Unknown")
+            page = doc.metadata.get("page", "Unknown")
+
+            key = f"{source}-page-{page}"
+
+            if key not in unique_sources:
+                unique_sources.add(key)
+                st.write(f"📄 {source} | Page {page}")
