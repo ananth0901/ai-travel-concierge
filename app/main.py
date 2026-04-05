@@ -41,4 +41,4 @@ if uploaded_file:
     response = llm.stream(prompt)
 
     for chunk in response:
-        st.write(chunk.content, end="")
+        st.empty(chunk.content, end="")
