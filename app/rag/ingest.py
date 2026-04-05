@@ -1,7 +1,7 @@
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
-embeddings = OpenAIEmbeddings()
+from langchain_community.embeddings import HuggingFaceEmbeddings
 
 def load_and_index(file_path):
     loader = PyPDFLoader(file_path)
@@ -13,11 +13,12 @@ def load_and_index(file_path):
     )
     chunks = splitter.split_documents(docs)
 
+    embeddings = HuggingFaceEmbeddings()
+
     db = Chroma.from_documents(
         chunks,
-        OpenAIEmbeddings(),
+        embeddings,
         persist_directory="db"
     )
-    db.persist()
 
     return db
