@@ -1,7 +1,7 @@
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
-from langchain_openai import OpenAIEmbeddings
+embeddings = OpenAIEmbeddings()
 
 def load_and_index(file_path):
     loader = PyPDFLoader(file_path)
