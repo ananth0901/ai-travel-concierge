@@ -22,7 +22,23 @@ if uploaded_file:
 
     query = st.text_input("Ask something")
 
-    if query:
-        docs = db.similarity_search(query)
-        answer = generate_answer(query, docs, memory)
-        st.write(answer)
+   if query:
+    docs = db.similarity_search(query)
+
+    from langchain.chat_models import ChatOpenAI
+    llm = ChatOpenAI(streaming=True)
+
+    context = "\n".join([doc.page_content for doc in docs])
+
+    prompt = f"""
+    Context:
+    {context}
+
+    Question:
+    {query}
+    """
+
+    response = llm.stream(prompt)
+
+    for chunk in response:
+        st.write(chunk.content, end="")
