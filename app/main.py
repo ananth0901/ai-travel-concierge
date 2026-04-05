@@ -45,3 +45,4 @@ if uploaded_file:
         with st.expander("📚 View Sources"):
     for i, doc in enumerate(docs):
         st.write(f"Source {i+1}: {doc.metadata.get('source', 'Unknown')}")
+@st.cache_resource
