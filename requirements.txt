@@ -1,1 +1,10 @@
-
+streamlit
+langchain
+langchain-community
+langchain-openai
+openai
+chromadb
+tiktoken
+pypdf
+rank_bm25
+sentence-transformers
